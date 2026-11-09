@@ -2,7 +2,7 @@
     - Navidrome:
         icon: navidrome.png
         href: http://localhost:4533
-        container: navidrome
+        description: Music Streaming Server
     - Uptime Kuma:
         icon: uptime-kuma.png
         href: http://localhost:3001

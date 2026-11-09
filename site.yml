@@ -1,0 +1,57 @@
+---
+- name: Deploy Homelab Infrastructure
+  hosts: local
+  gather_facts: yes
+
+  vars:
+    app_dir: "{{ ansible_facts.env.HOME }}/ansible-lab/deployed-apps"
+
+  tasks:
+    - name: Ensure Docker service is active
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Ensure target application directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ app_dir }}"
+        - "{{ app_dir }}/homepage"
+
+    - name: Copy Uptime Kuma Compose file
+      copy:
+        src: files/uptime-kuma-compose.yml
+        dest: "{{ app_dir }}/docker-compose.yml"
+        mode: '0644'
+
+    - name: Start Uptime Kuma stack
+      community.docker.docker_compose_v2:
+        project_src: "{{ app_dir }}"
+        state: present
+
+    - name: Ensure Homepage target directory exists
+      file:
+        path: "{{ app_dir }}/homepage/config"
+        state: directory
+        mode: '0755'
+
+    - name: Copy Homepage Compose file
+      copy:
+        src: files/homepage-compose.yml
+        dest: "{{ app_dir }}/homepage/docker-compose.yml"
+        mode: '0644'
+
+    - name: Copy Homepage configuration directory
+      copy:
+        src: homepage/config/
+        dest: "{{ app_dir }}/homepage/config/"
+        mode: '0644'
+
+    - name: Start Homepage stack
+      community.docker.docker_compose_v2:
+        project_src: "{{ app_dir }}/homepage"
+        state: present
