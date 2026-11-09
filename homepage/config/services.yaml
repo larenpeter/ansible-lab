@@ -1,0 +1,13 @@
+- Media & Services:
+    - Navidrome:
+        icon: navidrome.png
+        href: http://localhost:4533
+        container: navidrome
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: http://localhost:3001
+        container: uptime-kuma
+    - Homepage:
+        icon: homepage.png
+        href: http://localhost:3000
+        container: homepage
