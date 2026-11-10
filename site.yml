@@ -55,3 +55,20 @@
       community.docker.docker_compose_v2:
         project_src: "{{ app_dir }}/homepage"
         state: present
+
+    - name: Ensure Navidrome directory exists
+      file:
+        path: "{{ app_dir }}/navidrome"
+        state: directory
+        mode: '0755'
+
+    - name: Copy Navidrome Compose file
+      copy:
+        src: files/navidrome-compose.yml
+        dest: "{{ app_dir }}/navidrome/docker-compose.yml"
+        mode: '0644'
+
+    - name: Start Navidrome stack
+      community.docker.docker_compose_v2:
+        project_src: "{{ app_dir }}/navidrome"
+        state: present

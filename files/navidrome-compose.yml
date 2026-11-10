@@ -1,0 +1,13 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    ports:
+      - "4533:4533"
+    volumes:
+      - navidrome-data:/data
+      - /media/sf_Songs:/music:ro
+
+volumes:
+  navidrome-data:
