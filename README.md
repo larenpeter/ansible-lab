@@ -31,3 +31,4 @@ Running the playbook a second time should report `changed=0`.
 - `files/`: Docker Compose files for each app
 - `homepage/config/`: Homepage dashboard settings
 - `deployed-apps/`: generated on the target machine, not tracked in Gitrebuild my Ubuntu VM with Docker and Navidrome in one command
+- `roles/docker_app/`: reusable role that deploys one Docker Compose app
