@@ -1,13 +1,4 @@
 ---
-- name: Install Docker and Compose
-      become: true
-      apt:
-        name:
-          - docker.io
-          - docker-compose-v2
-        state: present
-        update_cache: true
-
 - name: Deploy Homelab Infrastructure
   hosts: local
   gather_facts: yes
@@ -16,7 +7,17 @@
     app_dir: "{{ ansible_facts.env.HOME }}/ansible-lab/deployed-apps"
 
   tasks:
+    - name: Install Docker and Compose
+      become: true
+      apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+        state: present
+        update_cache: true
+
     - name: Ensure Docker service is active
+      become: true
       service:
         name: docker
         state: started
@@ -29,24 +30,21 @@
         mode: '0755'
       loop:
         - "{{ app_dir }}"
+        - "{{ app_dir }}/uptime-kuma"
         - "{{ app_dir }}/homepage"
+        - "{{ app_dir }}/homepage/config"
+        - "{{ app_dir }}/navidrome"
 
     - name: Copy Uptime Kuma Compose file
       copy:
         src: files/uptime-kuma-compose.yml
-        dest: "{{ app_dir }}/docker-compose.yml"
+        dest: "{{ app_dir }}/uptime-kuma/docker-compose.yml"
         mode: '0644'
 
     - name: Start Uptime Kuma stack
       community.docker.docker_compose_v2:
-        project_src: "{{ app_dir }}"
+        project_src: "{{ app_dir }}/uptime-kuma"
         state: present
-
-    - name: Ensure Homepage target directory exists
-      file:
-        path: "{{ app_dir }}/homepage/config"
-        state: directory
-        mode: '0755'
 
     - name: Copy Homepage Compose file
       copy:
@@ -64,12 +62,6 @@
       community.docker.docker_compose_v2:
         project_src: "{{ app_dir }}/homepage"
         state: present
-
-    - name: Ensure Navidrome directory exists
-      file:
-        path: "{{ app_dir }}/navidrome"
-        state: directory
-        mode: '0755'
 
     - name: Copy Navidrome Compose file
       copy:
