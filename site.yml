@@ -23,53 +23,13 @@
         state: started
         enabled: yes
 
-    - name: Ensure target application directories exist
-      file:
-        path: "{{ item }}"
-        state: directory
-        mode: '0755'
+    - name: Deploy apps
+      ansible.builtin.include_role:
+        name: docker_app
+      vars:
+        app_name: "{{ item.name }}"
+        app_config_src: "{{ item.config | default('') }}"
       loop:
-        - "{{ app_dir }}"
-        - "{{ app_dir }}/uptime-kuma"
-        - "{{ app_dir }}/homepage"
-        - "{{ app_dir }}/homepage/config"
-        - "{{ app_dir }}/navidrome"
-
-    - name: Copy Uptime Kuma Compose file
-      copy:
-        src: files/uptime-kuma-compose.yml
-        dest: "{{ app_dir }}/uptime-kuma/docker-compose.yml"
-        mode: '0644'
-
-    - name: Start Uptime Kuma stack
-      community.docker.docker_compose_v2:
-        project_src: "{{ app_dir }}/uptime-kuma"
-        state: present
-
-    - name: Copy Homepage Compose file
-      copy:
-        src: files/homepage-compose.yml
-        dest: "{{ app_dir }}/homepage/docker-compose.yml"
-        mode: '0644'
-
-    - name: Copy Homepage configuration directory
-      copy:
-        src: homepage/config/
-        dest: "{{ app_dir }}/homepage/config/"
-        mode: '0644'
-
-    - name: Start Homepage stack
-      community.docker.docker_compose_v2:
-        project_src: "{{ app_dir }}/homepage"
-        state: present
-
-    - name: Copy Navidrome Compose file
-      copy:
-        src: files/navidrome-compose.yml
-        dest: "{{ app_dir }}/navidrome/docker-compose.yml"
-        mode: '0644'
-
-    - name: Start Navidrome stack
-      community.docker.docker_compose_v2:
-        project_src: "{{ app_dir }}/navidrome"
-        state: present
+        - { name: uptime-kuma }
+        - { name: homepage, config: "homepage/config/" }
+        - { name: navidrome }
