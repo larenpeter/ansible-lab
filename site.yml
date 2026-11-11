@@ -1,4 +1,13 @@
 ---
+- name: Install Docker and Compose
+      become: true
+      apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+        state: present
+        update_cache: true
+
 - name: Deploy Homelab Infrastructure
   hosts: local
   gather_facts: yes
