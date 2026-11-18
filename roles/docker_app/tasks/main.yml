@@ -18,6 +18,13 @@
     mode: '0644'
   when: app_config_src | length > 0
 
+- name: "{{ app_name }}: write .env"
+  ansible.builtin.copy:
+    content: "{{ app_env }}\n"
+    dest: "{{ app_dir }}/{{ app_name }}/.env"
+    mode: '0600'
+  when: app_env | default('') | length > 0
+
 - name: "{{ app_name }}: start stack"
   community.docker.docker_compose_v2:
     project_src: "{{ app_dir }}/{{ app_name }}"

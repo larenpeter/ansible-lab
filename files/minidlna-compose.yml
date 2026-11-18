@@ -1,0 +1,21 @@
+services:
+  minidlna:
+    image: vladgh/minidlna:latest
+    container_name: minidlna
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - MINIDLNA_FRIENDLY_NAME=Ubuntu-DLNA-Server
+      - MINIDLNA_MEDIA_DIR_1=A,/media/music
+      - MINIDLNA_MEDIA_DIR_2=A,/media/songs
+      - MINIDLNA_MEDIA_DIR_3=A,/media/songs1
+      - PUID=1000
+      - PGID=${VBOX_GID}
+    volumes:
+      - /media/sf_Music:/media/music:ro
+      - /media/sf_Songs:/media/songs:ro
+      - /media/sf_Songs1:/media/songs1:ro
+      - minidlna_data:/data
+
+volumes:
+  minidlna_data:
