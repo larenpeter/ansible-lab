@@ -1,3 +1,4 @@
 deployed-apps/
 *.log
 *.swp
+asterisk/config/pjsip.conf
