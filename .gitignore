@@ -2,3 +2,7 @@ deployed-apps/
 *.log
 *.swp
 asterisk/config/pjsip.conf
+.env
+secrets/
+*.pem
+*.key
