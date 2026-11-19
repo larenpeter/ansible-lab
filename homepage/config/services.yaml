@@ -79,6 +79,12 @@
         description: DLNA server for the WiiM and TV
         server: my-docker
         container: minidlna
+    - Beets:
+        icon: beets.png
+        href: http://127.0.0.1:8337
+        description: Music library auto-tagger and web UI
+        server: my-docker
+        container: beets
     - Navidrome:
         icon: navidrome.png
         href: http://localhost:4533
@@ -96,6 +102,12 @@
         description: Live container logs
         server: my-docker
         container: dozzle
+    - Beszel:
+        icon: beszel.png
+        href: http://127.0.0.1:8090
+        description: Server and container resource monitor
+        server: my-docker
+        container: beszel
     - Watchtower:
         icon: watchtower.png
         description: Image update checker (monitor only)
@@ -126,3 +138,9 @@
         description: Data encoding, decoding and analysis
         server: my-docker
         container: cyberchef
+    - BentoPDF:
+        icon: mdi-file-pdf-box
+        href: http://127.0.0.1:8085
+        description: Lightweight in-browser PDF toolkit
+        server: my-docker
+        container: bentopdf

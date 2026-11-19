@@ -45,7 +45,7 @@
 
     - name: Fetch deco-rate source at a pinned, reviewed commit
       ansible.builtin.git:
-        repo: https://github.com/SimonJPegg/deco-rate.git
+        repo: "https://github.com/SimonJPegg/deco-rate.git"
         dest: "{{ app_dir }}/monitoring/deco-rate-src"
         version: 819ca53a4b91a18f3b609346711797d2f4c2f5a9
 
@@ -67,3 +67,6 @@
         - { name: it-tools }
         - { name: librespeed }
         - { name: cyberchef }
+        - { name: bentopdf }
+        - { name: beszel, env: "SECRETS_DIR={{ ansible_facts.env.HOME }}/secrets" }
+        - { name: beets, env: "VBOX_GID={{ vboxsf_group.stdout.split(':')[2] if vboxsf_group.rc == 0 else '0' }}" }

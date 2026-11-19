@@ -1,0 +1,16 @@
+services:
+  beets:
+    image: lscr.io/linuxserver/beets:latest
+    container_name: beets
+    environment:
+      - PUID=1000
+      - PGID=${VBOX_GID}
+      - TZ=Asia/Kuala_Lumpur
+    volumes:
+      - ~/beets/config:/config
+      - /media/sf_Music:/music/sf_Music:ro
+      - /media/sf_Songs:/music/sf_Songs:ro
+      - /media/sf_Songs1:/music/sf_Songs1:ro
+    ports:
+      - "127.0.0.1:8337:8337"
+    restart: unless-stopped
