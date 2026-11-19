@@ -1,0 +1,11 @@
+services:
+  watchtower:
+    image: nickfedor/watchtower:latest
+    container_name: watchtower
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_MONITOR_ONLY=true
+      - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_DISABLE_CONTAINERS=deco-rate
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

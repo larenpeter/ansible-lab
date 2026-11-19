@@ -57,17 +57,52 @@
               format:
                 type: number
 
+    - Prometheus:
+        icon: prometheus.png
+        description: Metrics store
+        server: my-docker
+        container: prometheus
+        widget:
+          type: prometheus
+          url: http://prometheus:9090
+
+    - Deco exporter:
+        icon: mdi-chart-line
+        description: deco-rate, polls the Deco every 2 minutes
+        server: my-docker
+        container: deco-rate
+
 - Media & Services:
     - MiniDLNA:
         icon: mdi-speaker-wireless
         href: http://127.0.0.1:8200
         description: DLNA server for the WiiM and TV
+        server: my-docker
         container: minidlna
     - Navidrome:
         icon: navidrome.png
         href: http://localhost:4533
-        description: Music Streaming Server (parked)
+        description: Music streaming server (parked)
+    - Asterisk:
+        icon: asterisk.png
+        description: Phone system lab
+        server: my-docker
+        container: asterisk
+
+- Operations:
+    - Dozzle:
+        icon: dozzle.png
+        href: http://127.0.0.1:8081
+        description: Live container logs
+        server: my-docker
+        container: dozzle
+    - Watchtower:
+        icon: watchtower.png
+        description: Image update checker (monitor only)
+        server: my-docker
+        container: watchtower
     - Homepage:
         icon: homepage.png
         href: http://localhost:3000
+        server: my-docker
         container: homepage
