@@ -17,8 +17,12 @@ if ! command -v docker &> /dev/null; then
     sudo usermod -aG docker "$USER"
 fi
 
-# 3. Run the playbook (sg uses the docker group without needing a re-login)
+# 3. Ansible collections
+echo "[+] Installing Ansible collections..."
+ansible-galaxy collection install -r requirements.yml
+
+# 4. Run the playbook (sg uses the docker group without needing a re-login)
 echo "[+] Executing Ansible deployment playbook..."
-sg docker -c "ansible-playbook -i inventory.ini site.yml"
+sg docker -c "ansible-playbook -i inventory.ini site.yml --ask-become-pass"
 
 echo "[+] Homelab bootstrap complete!"
