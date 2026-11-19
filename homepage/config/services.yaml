@@ -108,6 +108,13 @@
         description: Server and container resource monitor
         server: my-docker
         container: beszel
+        widget:
+          type: beszel
+          url: http://beszel:8090
+          username: "{{HOMEPAGE_VAR_BESZEL_USER}}"
+          password: "{{HOMEPAGE_VAR_BESZEL_PASS}}"
+          systemId: ubuntu-vm
+          version: 2
     - Watchtower:
         icon: watchtower.png
         description: Image update checker (monitor only)

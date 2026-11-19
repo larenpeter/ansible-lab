@@ -58,7 +58,7 @@
         app_env: "{{ item.env | default('') }}"
       loop:
         - { name: monitoring, config: "monitoring/config/", env: "SECRETS_DIR={{ ansible_facts.env.HOME }}/secrets" }
-        - { name: homepage, config: "homepage/config/" }
+        - { name: homepage, config: "homepage/config/", env: "SECRETS_DIR={{ ansible_facts.env.HOME }}/secrets" }
         # - { name: navidrome }   # parked, add back to start it
         - { name: asterisk, config: "asterisk/config/" }
         - { name: minidlna, env: "VBOX_GID={{ vboxsf_group.stdout.split(':')[2] if vboxsf_group.rc == 0 else '0' }}" }
