@@ -64,3 +64,6 @@
         - { name: minidlna, env: "VBOX_GID={{ vboxsf_group.stdout.split(':')[2] if vboxsf_group.rc == 0 else '0' }}" }
         - { name: dozzle }
         - { name: watchtower }
+        - { name: it-tools }
+        - { name: librespeed }
+        - { name: cyberchef }

@@ -106,3 +106,23 @@
         href: http://localhost:3000
         server: my-docker
         container: homepage
+
+- Utilities:
+    - IT-Tools:
+        icon: it-tools.png
+        href: http://127.0.0.1:8082
+        description: Developer and network utilities
+        server: my-docker
+        container: it-tools
+    - LibreSpeed:
+        icon: librespeed.png
+        href: http://127.0.0.1:8083
+        description: Local Wi-Fi and LAN speedtest
+        server: my-docker
+        container: librespeed
+    - CyberChef:
+        icon: cyberchef.png
+        href: http://127.0.0.1:8084
+        description: Data encoding, decoding and analysis
+        server: my-docker
+        container: cyberchef

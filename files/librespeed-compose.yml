@@ -1,0 +1,10 @@
+services:
+  librespeed:
+    image: adolfintel/speedtest:latest
+    container_name: librespeed
+    environment:
+      - MODE=standalone
+      - TELEMETRY=false
+    ports:
+      - "8083:80"
+    restart: unless-stopped
