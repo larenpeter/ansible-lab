@@ -66,11 +66,33 @@
           type: prometheus
           url: http://prometheus:9090
 
-    - Deco exporter:
-        icon: mdi-chart-line
-        description: deco-rate, polls the Deco every 2 minutes
+    - Deco Mesh Signal:
+        icon: mdi-wifi-strength-4
+        description: Mesh radio signal & exporter health
         server: my-docker
         container: deco-rate
+        widget:
+          type: prometheusmetric
+          url: http://prometheus:9090
+          refreshInterval: 30000
+          metrics:
+            - label: 5 GHz
+              query: min(deco_node_signal_5g)
+              format:
+                type: number
+                suffix: " dBm"
+            - label: 2.4 GHz
+              query: min(deco_node_signal_2g)
+              format:
+                type: number
+                suffix: " dBm"
+            - label: Poll
+              query: deco_poll_duration_seconds
+              format:
+                type: number
+                suffix: "s"
+                options:
+                  maximumFractionDigits: 1
 
 - Media & Services:
     - MiniDLNA:
@@ -85,6 +107,7 @@
         description: Music library auto-tagger and web UI
         server: my-docker
         container: beets
+        ping: http://host.docker.internal:8337
     - Navidrome:
         icon: navidrome.png
         href: http://localhost:4533
@@ -102,6 +125,7 @@
         description: Live container logs
         server: my-docker
         container: dozzle
+        ping: http://host.docker.internal:8081
     - Beszel:
         icon: beszel.png
         href: http://127.0.0.1:8090
@@ -133,21 +157,25 @@
         description: Developer and network utilities
         server: my-docker
         container: it-tools
+        ping: http://host.docker.internal:8082
     - LibreSpeed:
         icon: librespeed.png
         href: http://127.0.0.1:8083
         description: Local Wi-Fi and LAN speedtest
         server: my-docker
         container: librespeed
+        ping: http://host.docker.internal:8083
     - CyberChef:
         icon: cyberchef.png
         href: http://127.0.0.1:8084
         description: Data encoding, decoding and analysis
         server: my-docker
         container: cyberchef
+        ping: http://host.docker.internal:8084
     - BentoPDF:
         icon: mdi-file-pdf-box
         href: http://127.0.0.1:8085
         description: Lightweight in-browser PDF toolkit
         server: my-docker
         container: bentopdf
+        ping: http://host.docker.internal:8085
