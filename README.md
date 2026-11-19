@@ -12,7 +12,8 @@ Ansible playbook and bootstrap script that rebuild a Docker-based homelab VM
 - MiniDLNA (DLNA music server for a WiiM streamer and a Samsung TV)
 - Dozzle (live container logs, bound to localhost)
 - Watchtower (checks for newer images, monitor only)
-- Asterisk (phone system lab)
+- Asterisk (phone system lab, work in progress — container deploys but is not
+  wired to anything yet)
 - Navidrome (music streaming, commented out in `site.yml`, uncomment to run)
 
 ## Design notes
