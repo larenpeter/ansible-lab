@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 60s
+
+scrape_configs:
+  - job_name: deco
+    static_configs:
+      - targets: ['deco-rate:9550']

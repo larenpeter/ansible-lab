@@ -7,12 +7,13 @@
     app_dir: "{{ ansible_facts.env.HOME }}/ansible-lab/deployed-apps"
 
   tasks:
-    - name: Install Docker and Compose
+    - name: Install Docker, Compose and git
       become: true
       apt:
         name:
           - docker.io
           - docker-compose-v2
+          - git
         state: present
         update_cache: true
 
@@ -36,6 +37,18 @@
       changed_when: false
       failed_when: false
 
+    - name: Create the shared Docker network
+      ansible.builtin.command: docker network create homelab
+      register: net_create
+      changed_when: net_create.rc == 0
+      failed_when: net_create.rc != 0 and 'already exists' not in net_create.stderr
+
+    - name: Fetch deco-rate source at a pinned, reviewed commit
+      ansible.builtin.git:
+        repo: https://github.com/SimonJPegg/deco-rate.git
+        dest: "{{ app_dir }}/monitoring/deco-rate-src"
+        version: 819ca53a4b91a18f3b609346711797d2f4c2f5a9
+
     - name: Deploy apps
       ansible.builtin.include_role:
         name: docker_app
@@ -44,6 +57,7 @@
         app_config_src: "{{ item.config | default('') }}"
         app_env: "{{ item.env | default('') }}"
       loop:
+        - { name: monitoring, config: "monitoring/config/", env: "SECRETS_DIR={{ ansible_facts.env.HOME }}/secrets" }
         - { name: homepage, config: "homepage/config/" }
         # - { name: navidrome }   # parked, add back to start it
         - { name: asterisk, config: "asterisk/config/" }
