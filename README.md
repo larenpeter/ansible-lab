@@ -3,6 +3,8 @@
 Ansible playbook and bootstrap script that rebuild a Docker-based homelab VM
 (Ubuntu 26.04 LTS on VirtualBox).
 
+![Homepage dashboard](docs/homepage.png)
+
 ## What it deploys
 - Homepage dashboard, with Prometheus-backed widgets and container status
 - Prometheus and deco-rate (metrics for a TP-Link Deco X50 mesh; the deco-rate
