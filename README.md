@@ -6,29 +6,37 @@ Ansible playbook and bootstrap script that rebuild a Docker-based homelab VM
 ![Homepage dashboard](docs/homepage.png)
 
 ## What it deploys
-- Homepage dashboard, with Prometheus-backed widgets and container status
-- Prometheus and deco-rate (metrics for a TP-Link Deco X50 mesh; the deco-rate
-  source is pinned to a reviewed commit and built locally)
-- MiniDLNA (DLNA music server for a WiiM streamer and a Samsung TV)
-- Dozzle (live container logs, bound to localhost)
-- Watchtower (checks for newer images, monitor only)
-- Asterisk (phone system lab, work in progress — container deploys but is not
-  wired to anything yet)
-- Navidrome (music streaming, commented out in `site.yml`, uncomment to run)
+- **Monitoring & System Stats:**
+  - Homepage dashboard, with Prometheus-backed widgets and container status
+  - Prometheus and deco-rate (metrics for a TP-Link Deco X50 mesh; the deco-rate source is pinned to a reviewed commit and built locally)
+  - Beszel and Beszel Agent (lightweight host and Docker resource monitoring)
+- **Media & Voice:**
+  - MiniDLNA (DLNA music server for a WiiM streamer and a Samsung TV)
+  - Beets (music library cataloger and web player mounted read-only to shared folders)
+  - Asterisk (phone system lab, work in progress — container deploys but is not wired to anything yet)
+  - Navidrome (music streaming, commented out in `site.yml`, uncomment to run)
+- **Operations & Utilities:**
+  - Dozzle (live container logs, bound to localhost)
+  - Watchtower (checks for newer images, monitor only)
+  - IT-Tools (offline developer and network utilities)
+  - LibreSpeed (local Wi-Fi and LAN speedtest)
+  - CyberChef (data encoding, decoding, and log analysis)
+  - BentoPDF (lightweight in-browser PDF toolkit)
 
 ## Design notes
 - One reusable role, `roles/docker_app`, deploys any app from
   `files/<app>-compose.yml`. Adding an app is one line in the `site.yml` loop.
 - No secrets in the repo. Real credentials live outside it and are mounted
   read-only into the containers.
-- Containers that need no outside access publish no ports, and the exporter
-  runs with a read-only filesystem and dropped privileges.
+- Containers that need no outside access publish no ports, bind to `127.0.0.1`,
+  and mount shared media folders read-only (`:ro`).
 
 ## What you provide yourself (not in the repo)
 - `~/secrets/deco-rate.yaml`: the deco-rate config with your TP-Link login
+- `~/secrets/beszel.env`: the Beszel agent SSH public key (`KEY="ssh-ed25519 ..."`)
 - `asterisk/config/pjsip.conf`: copy `pjsip.conf.example` and set real passwords
-- VirtualBox shared folders `sf_Music`, `sf_Songs`, `sf_Songs1` for MiniDLNA,
-  or edit the paths in `files/minidlna-compose.yml`
+- VirtualBox shared folders `sf_Music`, `sf_Songs`, `sf_Songs1` for MiniDLNA and Beets,
+  or edit the paths in `files/minidlna-compose.yml` and `files/beets-compose.yml`
 
 ## Usage
     git clone https://github.com/larenpeter/ansible-lab.git
