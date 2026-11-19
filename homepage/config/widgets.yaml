@@ -1,4 +1,18 @@
-- resources:
-    cpu: true
-    memory: true
-    disk: "/"
+- greeting:
+    text_size: xl
+    text: "Laren's Homelab"
+
+- openmeteo:
+    label: Kuala Lumpur
+    latitude: 3.1390
+    longitude: 101.6869
+    timezone: Asia/Kuala_Lumpur
+    units: metric
+    cache: 5
+
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: short
+      timeStyle: short
+      hourCycle: h23

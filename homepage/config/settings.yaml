@@ -1,7 +1,25 @@
 ---
-# For configuration options and examples, please see:
-# https://gethomepage.dev/configs/settings/
+title: Laren's Homelab
+theme: dark
+color: amber
+headerStyle: clean
+cardStyle: hairline
+blockStyle: refined
+statusStyle: "dot"
+useEqualHeights: true
+hideVersion: true
+fullWidth: true
 
-providers:
-  openweathermap: openweathermapapikey
-  weatherapi: weatherapiapikey
+layout:
+  Network:
+    style: row
+    columns: 4
+  Media & Services:
+    style: row
+    columns: 4
+  Operations:
+    style: row
+    columns: 4
+  Utilities:
+    style: row
+    columns: 4

@@ -1,18 +1,20 @@
 ---
-# For configuration options and examples, please see:
-# https://gethomepage.dev/configs/bookmarks
+- Homelab:
+    - ansible-lab:
+        - icon: github.png
+          href: https://github.com/larenpeter/ansible-lab
+          description: Homelab Ansible repo
+    - Homepage Docs:
+        - icon: homepage.png
+          href: https://gethomepage.dev
+          description: Configuration & widgets
 
-- Developer:
-    - Github:
-        - abbr: GH
-          href: https://github.com/
-
-- Social:
-    - Reddit:
-        - abbr: RE
-          href: https://reddit.com/
-
-- Entertainment:
-    - YouTube:
-        - abbr: YT
-          href: https://youtube.com/
+- Network & Docs:
+    - Deco X50 Admin:
+        - icon: tp-link.png
+          href: http://192.168.68.1
+          description: TP-Link Deco web UI
+    - LinuxServer Images:
+        - icon: docker.png
+          href: https://linuxserver.io
+          description: Container docs & tags
