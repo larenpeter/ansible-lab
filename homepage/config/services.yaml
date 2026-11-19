@@ -1,3 +1,62 @@
+- Network:
+    - Deco X50:
+        icon: tp-link.png
+        href: http://192.168.68.1
+        description: TP-Link Deco X50 mesh
+        widget:
+          type: prometheusmetric
+          url: http://prometheus:9090
+          refreshInterval: 30000
+          metrics:
+            - label: Clients
+              query: deco_clients_total
+              format:
+                type: number
+            - label: Nodes online
+              query: deco_nodes_online
+              format:
+                type: number
+            - label: CPU
+              query: deco_cpu_usage * 100
+              format:
+                type: number
+                suffix: "%"
+                options:
+                  maximumFractionDigits: 0
+            - label: Memory
+              query: deco_memory_usage * 100
+              format:
+                type: number
+                suffix: "%"
+                options:
+                  maximumFractionDigits: 0
+
+    - Deco Traffic:
+        icon: tp-link.png
+        href: http://192.168.68.1
+        description: Live mesh traffic and status
+        widget:
+          type: prometheusmetric
+          url: http://prometheus:9090
+          refreshInterval: 30000
+          metrics:
+            - label: Download
+              query: sum(deco_client_rx_bytes_per_second)
+              format:
+                type: byterate
+            - label: Upload
+              query: sum(deco_client_tx_bytes_per_second)
+              format:
+                type: byterate
+            - label: Internet
+              query: deco_internet_online
+              format:
+                type: number
+            - label: Firmware update
+              query: max(deco_firmware_update_available)
+              format:
+                type: number
+
 - Media & Services:
     - MiniDLNA:
         icon: mdi-speaker-wireless
