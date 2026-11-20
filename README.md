@@ -12,7 +12,7 @@ Ansible playbook and bootstrap script that rebuild a Docker-based homelab VM
   - Beszel and Beszel Agent (lightweight host and Docker resource monitoring)
 - **Media & Voice:**
   - MiniDLNA (DLNA music server for a WiiM streamer and a Samsung TV)
-  - Asterisk (phone system lab, work in progress — container deploys but is not wired to anything yet)
+  - Asterisk (VoIP PBX with PJSIP extensions 6001/6002, *43 Echo, 7000 Speaking Clock, and 9700 Voicemail)
   - Navidrome (music streaming, commented out in `site.yml`, uncomment to run)
 - **Operations & Utilities:**
   - Dozzle (live container logs, bound to localhost)
@@ -34,7 +34,7 @@ Ansible playbook and bootstrap script that rebuild a Docker-based homelab VM
 - `~/secrets/deco-rate.yaml`: the deco-rate config with your TP-Link login
 - `~/secrets/beszel.env`: the Beszel agent SSH public key (`KEY="ssh-ed25519 ..."`)
 - `~/secrets/homepage.env`: the Beszel login credentials for Homepage (`HOMEPAGE_VAR_BESZEL_USER`, `HOMEPAGE_VAR_BESZEL_PASS`)
-- `asterisk/config/pjsip.conf`: copy `pjsip.conf.example` and set real passwords
+- `asterisk/config/pjsip.conf` & `voicemail.conf`: copy `.example` files and set real passwords/PINs
 - VirtualBox shared folders `sf_Music`, `sf_Songs`, `sf_Songs1` for MiniDLNA,
   or edit the paths in `files/minidlna-compose.yml`
 
