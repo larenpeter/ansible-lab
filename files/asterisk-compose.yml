@@ -1,9 +1,16 @@
-
 services:
   asterisk:
     image: andrius/asterisk:latest
     container_name: asterisk
     network_mode: host
+    environment:
+      - TZ=Asia/Kuala_Lumpur
     restart: unless-stopped
     volumes:
       - ./config:/etc/asterisk
+      - asterisk_sounds:/var/lib/asterisk/sounds/en
+      - asterisk_spool:/var/spool/asterisk
+
+volumes:
+  asterisk_sounds:
+  asterisk_spool:

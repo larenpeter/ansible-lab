@@ -1,0 +1,10 @@
+[general]
+format=wav49|gsm|wav
+serveremail=asterisk@homelab.local
+attach=no
+maxmsg=50
+maxsecs=120
+
+[default]
+6001 => CHANGE-ME,Laptop Extension
+6002 => CHANGE-ME,iPhone Extension
