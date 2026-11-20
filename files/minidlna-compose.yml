@@ -6,6 +6,7 @@ services:
     network_mode: host
     environment:
       - MINIDLNA_FRIENDLY_NAME=Ubuntu-DLNA-Server
+      - MINIDLNA_NETWORK_INTERFACE=enp0s3
       - MINIDLNA_MEDIA_DIR_1=A,/media/music
       - MINIDLNA_MEDIA_DIR_2=A,/media/songs
       - MINIDLNA_MEDIA_DIR_3=A,/media/songs1
