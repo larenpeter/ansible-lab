@@ -3,7 +3,7 @@
 Ansible playbook and bootstrap script that rebuild a Docker-based homelab VM
 (Ubuntu 26.04 LTS on VirtualBox).
 
-![Homepage dashboard](docs/homepage.png)
+![Homepage dashboard](docs/homepage.png?v=2)
 
 ## What it deploys
 - **Monitoring & System Stats:**
