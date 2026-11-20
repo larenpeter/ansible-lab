@@ -48,12 +48,12 @@
               query: sum(deco_client_tx_bytes_per_second)
               format:
                 type: byterate
-            - label: Internet
-              query: deco_internet_online
+            - label: 5 GHz
+              query: count(deco_client_info{connection_type="band5", online="true"}) or vector(0)
               format:
                 type: number
-            - label: Firmware update
-              query: max(deco_firmware_update_available)
+            - label: 2.4 GHz
+              query: count(deco_client_info{connection_type="band2_4", online="true"}) or vector(0)
               format:
                 type: number
 
