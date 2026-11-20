@@ -106,7 +106,7 @@
         description: Music streaming server (parked)
     - Asterisk:
         icon: asterisk.png
-        description: Phone system lab
+        description: VoIP PBX (6001/6002, *43 Echo, 7000 Clock, 9700 VM)
         server: my-docker
         container: asterisk
 

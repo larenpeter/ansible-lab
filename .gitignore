@@ -6,3 +6,4 @@ asterisk/config/pjsip.conf
 secrets/
 *.pem
 *.key
+asterisk/config/voicemail.conf
