@@ -57,15 +57,6 @@
               format:
                 type: number
 
-    - Prometheus:
-        icon: prometheus.png
-        description: Metrics store
-        server: my-docker
-        container: prometheus
-        widget:
-          type: prometheus
-          url: http://prometheus:9090
-
     - Deco Mesh Signal:
         icon: mdi-wifi-strength-4
         description: Mesh radio signal & exporter health
@@ -94,6 +85,14 @@
                 options:
                   maximumFractionDigits: 1
 
+    - Prometheus:
+        icon: prometheus.png
+        description: Metrics store
+        server: my-docker
+        container: prometheus
+        widget:
+          type: prometheus
+          url: http://prometheus:9090
 - Media & Services:
     - MiniDLNA:
         icon: mdi-speaker-wireless
@@ -101,13 +100,6 @@
         description: DLNA server for the WiiM and TV
         server: my-docker
         container: minidlna
-    - Beets:
-        icon: beets.png
-        href: http://127.0.0.1:8337
-        description: Music library auto-tagger and web UI
-        server: my-docker
-        container: beets
-        ping: http://host.docker.internal:8337
     - Navidrome:
         icon: navidrome.png
         href: http://localhost:4533
