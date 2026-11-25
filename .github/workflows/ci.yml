@@ -25,7 +25,10 @@ jobs:
       - name: Validate Compose files
         run: |
           mkdir -p /tmp/secrets
-          touch /tmp/secrets/beszel.env /tmp/secrets/deco-rate.yaml
+          grep -ohE 'SECRETS_DIR\}?/[A-Za-z0-9._-]+' files/*-compose.yml | sed -E 's|SECRETS_DIR\}?/||' | sort -u | while read -r name; do
+            echo "placeholder: $name"
+            touch "/tmp/secrets/$name"
+          done
           for f in files/*-compose.yml; do
             echo "checking $f"
             VBOX_GID=0 SECRETS_DIR=/tmp/secrets docker compose -f "$f" config -q
