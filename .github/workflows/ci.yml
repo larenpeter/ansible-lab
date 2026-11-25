@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          python3 -m pip install --user ansible-core yamllint
+          ansible-galaxy collection install -r requirements.yml
+
+      - name: YAML lint
+        run: yamllint -d relaxed site.yml roles files homepage monitoring
+
+      - name: Playbook syntax check
+        run: ansible-playbook -i inventory.ini site.yml --syntax-check
+
+      - name: Validate Compose files
+        run: |
+          for f in files/*-compose.yml; do
+            echo "checking $f"
+            VBOX_GID=0 SECRETS_DIR=/tmp docker compose -f "$f" config -q
+          done
