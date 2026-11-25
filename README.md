@@ -1,5 +1,7 @@
 # ansible-lab
 
+![CI](https://github.com/larenpeter/ansible-lab/actions/workflows/ci.yml/badge.svg)
+
 Ansible playbook and bootstrap script that rebuild a Docker-based homelab VM
 (Ubuntu 26.04 LTS on VirtualBox).
 
